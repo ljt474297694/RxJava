@@ -7,13 +7,34 @@
     android:orientation="vertical"
     >
     <Button
-        android:text="加载图片"
-        android:id="@+id/btn_loadimage"
+        android:text="RX测试1"
+        android:id="@+id/bt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="wrap_content"
+    <Button
+        android:text="RX测试2"
+        android:id="@+id/bt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="RX测试3"
+        android:id="@+id/bt3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="RX测试4"
+        android:id="@+id/bt4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="RX测试5"
+        android:id="@+id/bt5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="RX测试6"
+        android:id="@+id/bt6"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
