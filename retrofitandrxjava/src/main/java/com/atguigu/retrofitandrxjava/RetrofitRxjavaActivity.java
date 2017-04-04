@@ -9,9 +9,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -50,15 +47,20 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
         String username = et1.getText().toString().trim();
         String password = et2.getText().toString().trim();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)//baseUrl 请求根连接 此处为 "http://47.93.118.241:8081/"
-                .addConverterFactory(GsonConverterFactory.create()) //Gson解析工厂 自动解析Bean
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//RxJava回调工厂 表示支持返回Observable
-                .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(baseUrl)//baseUrl 请求根连接 此处为 "http://47.93.118.241:8081/"
+//                .addConverterFactory(GsonConverterFactory.create()) //Gson解析工厂 自动解析Bean
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//RxJava回调工厂 表示支持返回Observable
+//                .build();
+//
+//        RequestServes requestServes = retrofit.create(RequestServes.class);
 
-        RequestServes requestServes = retrofit.create(RequestServes.class);
+        //调用工具类 创建业务接口实例
+        RequestServes retrofitServes = new RetrofitUtils<RequestServes>()
+                .createRetrofitServes(baseUrl, RequestServes.class);
 
-        requestServes.login(username, password, "123123123")
+
+        retrofitServes.login(username, password, "123123123")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<User>() {
@@ -67,6 +69,7 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
                         tvContent.setText(user.toString());
                     }
                 });
+
     }
 
 

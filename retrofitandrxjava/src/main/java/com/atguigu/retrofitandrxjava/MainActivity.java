@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     Button btn1;
     @Bind(R.id.btn2)
     Button btn2;
-    private String url = "http://47.93.118.241:8081?username=afu&password=123456&phone=18601042258";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +36,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    public void onClick() {
-//
-//
-//    }
-//
 
 }
