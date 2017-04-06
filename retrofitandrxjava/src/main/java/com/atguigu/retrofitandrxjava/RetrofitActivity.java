@@ -65,10 +65,8 @@ public class RetrofitActivity extends AppCompatActivity {
                         //response.body() 直接得到解析Bean对象  此处为User
                         tvContent.setText(response.body().toString());
                     }
-
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-
                     }
                 });
     }

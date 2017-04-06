@@ -9,12 +9,12 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class RetrofitRxjavaActivity extends AppCompatActivity {
     @Bind(R.id.et1)
@@ -63,13 +63,12 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
         retrofitServes.login(username, password, "123123123")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<User>() {
+                .subscribe(new Consumer<User>() {
                     @Override
-                    public void call(User user) {
+                    public void accept(User user) throws Exception {
                         tvContent.setText(user.toString());
                     }
                 });
-
     }
 
 
@@ -82,4 +81,5 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
                                @Query("password") String password,
                                @Query("phone") String phone);
     }
+
 }

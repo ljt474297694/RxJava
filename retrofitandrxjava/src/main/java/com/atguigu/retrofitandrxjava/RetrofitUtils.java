@@ -16,19 +16,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUtils<T> {
     /**
      * @param baseUrl     baseUrl
-     * @param servesClass 需要创建的业务接口的class 必须与类泛型相通
+     * @param serviceClass 需要创建的业务接口的class 必须与T相同
      * @return
      */
-    public T createRetrofitServes(String baseUrl, Class servesClass) {
-        if (TextUtils.isEmpty(baseUrl) || servesClass == null) {
+    public T createRetrofitServes(String baseUrl, Class serviceClass) {
+        if (TextUtils.isEmpty(baseUrl) || serviceClass == null) {
             throw new NullPointerException();
         }
-
         return (T) new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build().create(servesClass);
-
+                .build().create(serviceClass);
     }
 }
