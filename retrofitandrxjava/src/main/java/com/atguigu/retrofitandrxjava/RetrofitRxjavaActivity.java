@@ -13,8 +13,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public class RetrofitRxjavaActivity extends AppCompatActivity {
     @Bind(R.id.et1)
@@ -42,6 +43,7 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
 
     /**
      * 账号 123 密码 123 电话123123123 可以登录
+     *
      */
     public void login() {
         String username = et1.getText().toString().trim();
@@ -70,16 +72,15 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
     //业务接口
     public interface RequestServes {
         //使用@Query("字段名")   Retrofit会自动拼接字段 发送请求
         //拼接后续连接
+        @FormUrlEncoded
         @POST("android/user/login")
-        Observable<User> login(@Query("username") String username,
-                               @Query("password") String password,
-                               @Query("phone") String phone);
+        Observable<User> login(@Field("username") String username,
+                               @Field("password") String password,
+                               @Field("phone") String phone);
     }
 
 }
