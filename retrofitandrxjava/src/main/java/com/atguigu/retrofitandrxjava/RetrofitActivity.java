@@ -1,10 +1,11 @@
 package com.atguigu.retrofitandrxjava;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -16,7 +17,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public class RetrofitActivity extends AppCompatActivity {
+public class RetrofitActivity extends RxAppCompatActivity {
 
     @Bind(R.id.et1)
     EditText et1;
@@ -55,7 +56,7 @@ public class RetrofitActivity extends AppCompatActivity {
 //        retrofit.create(RequestServes.class) //此处得到业务接口实例     RequestServes requestServes = retrofit.create(RequestServes.class);
 
 
-        //调用工具类 创建业务接口实例
+              //调用工具类 创建业务接口实例
         RequestServes retrofitServes = new RetrofitUtils<RequestServes>()
                 .createRetrofitServes(baseUrl, RequestServes.class);
 

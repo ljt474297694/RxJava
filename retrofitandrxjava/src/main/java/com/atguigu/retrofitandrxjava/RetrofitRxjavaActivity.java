@@ -1,10 +1,12 @@
 package com.atguigu.retrofitandrxjava;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,7 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public class RetrofitRxjavaActivity extends AppCompatActivity {
+public class RetrofitRxjavaActivity extends RxAppCompatActivity {
     @Bind(R.id.et1)
     EditText et1;
     @Bind(R.id.et2)
@@ -43,7 +45,6 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
 
     /**
      * 账号 123 密码 123 电话123123123 可以登录
-     *
      */
     public void login() {
         String username = et1.getText().toString().trim();
@@ -64,6 +65,8 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
 
         retrofitServes.login(username, password, "123123123")
                 .subscribeOn(Schedulers.io())
+                //表示当 Activity Destroy的时候停止发射数据
+                .compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<User>() {
                     @Override
@@ -72,6 +75,7 @@ public class RetrofitRxjavaActivity extends AppCompatActivity {
                     }
                 });
     }
+
     //业务接口
     public interface RequestServes {
         //使用@Query("字段名")   Retrofit会自动拼接字段 发送请求
