@@ -65,6 +65,7 @@ public class RetrofitRxjavaActivity extends RxAppCompatActivity {
 
         retrofitServes.login(username, password, "123123123")
                 .subscribeOn(Schedulers.io())
+                //Rxlifecycle的使用 关联Activity的声明周期
                 //表示当 Activity Destroy的时候停止发射数据
                 .compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
