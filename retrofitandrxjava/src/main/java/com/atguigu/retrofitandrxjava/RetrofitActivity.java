@@ -56,7 +56,7 @@ public class RetrofitActivity extends RxAppCompatActivity {
 //        retrofit.create(RequestServes.class) //此处得到业务接口实例     RequestServes requestServes = retrofit.create(RequestServes.class);
 
 
-              //调用工具类 创建业务接口实例
+        //调用工具类 创建业务接口实例
         RequestServes retrofitServes = new RetrofitUtils<RequestServes>()
                 .createRetrofitServes(baseUrl, RequestServes.class);
 
@@ -67,6 +67,7 @@ public class RetrofitActivity extends RxAppCompatActivity {
                         //response.body() 直接得到解析Bean对象  此处为User
                         tvContent.setText(response.body().toString());
                     }
+
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                     }

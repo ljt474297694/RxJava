@@ -13,7 +13,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -69,12 +68,7 @@ public class RetrofitRxjavaActivity extends RxAppCompatActivity {
                 //表示当 Activity Destroy的时候停止发射数据
                 .compose(this.<User>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) throws Exception {
-                        tvContent.setText(user.toString());
-                    }
-                });
+                .subscribe((User user) -> tvContent.setText(user.toString()));
     }
 
     //业务接口
